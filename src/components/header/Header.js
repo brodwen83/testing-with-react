@@ -5,10 +5,10 @@ import './header-styles.scss';
 
 const Header = () => {
   return (
-    <header>
+    <header data-test='headerComponent'>
       <div className='wrap'>
         <div className='logo'>
-          <img src={Logo} alt='SimpleTut' />
+          <img data-test='logoImg' src={Logo} alt='SimpleTut' />
         </div>
       </div>
     </header>
