@@ -1,7 +1,8 @@
+/* eslint-disable react/forbid-foreign-prop-types */
 import React from 'react';
 import { shallow } from 'enzyme';
 import '../../setupTests';
-import { findByTestAtrr } from '../../../utils/test';
+import { findByTestAtrr, checkProps } from '../../../utils/test';
 import Headline from './Headline';
 
 const setUp = (props = {}) => {
@@ -10,6 +11,24 @@ const setUp = (props = {}) => {
 };
 
 describe('Headline Component', () => {
+  describe('Checking PropTypes', () => {
+    it('should not throw a warning', () => {
+      const expectedProps = {
+        header: 'Test Header',
+        desc: 'Test Description',
+        tempArr: [
+          {
+            fName: 'Test fName',
+            lName: 'Test lName',
+            age: 23,
+            onlineStatus: false,
+          },
+        ],
+      };
+      const propsErr = checkProps(Headline, expectedProps);
+      expect(propsErr).toBeUndefined();
+    });
+  });
   describe('Have props', () => {
     let wrapper;
 
