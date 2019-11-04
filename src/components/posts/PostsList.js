@@ -10,7 +10,7 @@ const PostsList = ({ posts }) => {
   if (posts.length === 0) return null;
 
   return (
-    <div>
+    <div data-test='postsListComponent'>
       {posts.map(({ title, body }, index) => {
         return <PostItem title={title} body={body} key={index} />;
       })}
