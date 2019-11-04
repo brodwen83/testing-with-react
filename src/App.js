@@ -1,8 +1,12 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import { Header } from './components/header';
 import { Headline } from './components/headline';
+import { SharedButton } from './components/buttons';
+import { fetchPosts } from './redux/posts/posts.actions';
 
 import './styles/app.scss';
+import PostsList from './components/posts/PostsList';
 
 const tempArr = [
   {
@@ -13,7 +17,17 @@ const tempArr = [
   },
 ];
 
-function App() {
+const App = ({ fetchPosts }) => {
+  const fetch = () => {
+    console.log('fetch clicked');
+    fetchPosts();
+  };
+
+  const configButton = {
+    buttonText: 'Get posts',
+    emitEvent: fetch,
+  };
+
   return (
     <div className='App'>
       <Header />
@@ -23,9 +37,18 @@ function App() {
           desc='click the button to render posts!'
           tempArr={tempArr}
         />
+        <SharedButton {...configButton} />
+        <PostsList />
       </section>
     </div>
   );
-}
+};
 
-export default App;
+const mapStateToProps = state => ({
+  posts: state.posts,
+});
+
+export default connect(
+  mapStateToProps,
+  { fetchPosts },
+)(App);
