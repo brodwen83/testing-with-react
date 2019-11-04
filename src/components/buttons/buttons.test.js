@@ -18,10 +18,13 @@ describe('Buttons', () => {
 
   describe('Render SharedButton', () => {
     let wrapper;
+    let mockFunc;
     beforeEach(() => {
+      mockFunc = jest.fn();
       const props = {
         buttonText: 'Example Button Text',
-        emitEvent: () => {},
+        //https://airbnb.io/enzyme/docs/api/ShallowWrapper/simulate.html
+        emitEvent: mockFunc,
       };
       wrapper = shallow(<SharedButton {...props} />);
     });
@@ -29,6 +32,13 @@ describe('Buttons', () => {
     it('should render a button', () => {
       const button = findByTestAtrr(wrapper, 'sharedButtonComponent');
       expect(button.length).toBe(1);
+    });
+
+    it('should emit callback onClick event', () => {
+      const button = findByTestAtrr(wrapper, 'sharedButtonComponent');
+      button.simulate('click');
+      const callback = mockFunc.mock.calls.length;
+      expect(callback).toBe(1);
     });
   });
 });
