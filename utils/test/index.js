@@ -1,5 +1,8 @@
 /* eslint-disable react/forbid-foreign-prop-types */
 import checkPropTypes from 'check-prop-types';
+import { applyMiddleware, createStore } from 'redux';
+import rootReducer from '../../src/redux/rootReducer';
+import { middlewares } from '../../src/redux/store';
 
 /**
  * @description Finds Component's testable attribute
@@ -24,4 +27,11 @@ export const checkProps = (component, expectedProps) => {
     component.name,
   );
   return propsErr;
+};
+
+export const testStore = initialState => {
+  const createStoreWithMiddleware = applyMiddleware(...middlewares)(
+    createStore,
+  );
+  return createStoreWithMiddleware(rootReducer, initialState);
 };
