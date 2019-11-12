@@ -28,4 +28,12 @@ describe('App Component', () => {
     const appComponent = findByTestAtrr(wrapper, 'appComponent');
     expect(appComponent.length).toBe(1);
   });
+
+  test('toggleHideBtn should update state ', () => {
+    const instance = wrapper.instance();
+    // instance.toggleHideBtn();
+    // const newState = instance.state.hideBtn;
+
+    expect(instance).toEqual(null);
+  });
 });

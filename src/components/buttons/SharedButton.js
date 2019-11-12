@@ -1,5 +1,5 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React from "react";
+import PropTypes from "prop-types";
 
 const SharedButton = ({ buttonText, emitEvent }) => {
   const handleEvent = () => {
@@ -7,7 +7,11 @@ const SharedButton = ({ buttonText, emitEvent }) => {
   };
 
   return (
-    <button data-test='sharedButtonComponent' onClick={handleEvent}>
+    <button
+      type="button"
+      data-test="sharedButtonComponent"
+      onClick={handleEvent}
+    >
       {buttonText}
     </button>
   );
@@ -15,7 +19,7 @@ const SharedButton = ({ buttonText, emitEvent }) => {
 
 SharedButton.propTypes = {
   buttonText: PropTypes.string,
-  emitEvent: PropTypes.func,
+  emitEvent: PropTypes.func
 };
 
 export default SharedButton;

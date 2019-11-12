@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import { Header } from './components/header';
 import { Headline } from './components/headline';
@@ -18,14 +18,21 @@ const tempArr = [
 ];
 
 const App = ({ fetchPosts }) => {
+  const [hideBtn, setHideBtn] = useState(false);
+
   const fetch = () => {
     console.log('fetch clicked');
     fetchPosts();
+    toggleHideBtn();
   };
 
   const configButton = {
     buttonText: 'Get posts',
     emitEvent: fetch,
+  };
+
+  const toggleHideBtn = () => {
+    setHideBtn(!hideBtn);
   };
 
   return (
@@ -37,7 +44,7 @@ const App = ({ fetchPosts }) => {
           desc='click the button to render posts!'
           tempArr={tempArr}
         />
-        <SharedButton {...configButton} />
+        {!hideBtn && <SharedButton {...configButton} />}
         <PostsList />
       </section>
     </div>
@@ -48,7 +55,4 @@ const mapStateToProps = state => ({
   posts: state.posts,
 });
 
-export default connect(
-  mapStateToProps,
-  { fetchPosts },
-)(App);
+export default connect(mapStateToProps, { fetchPosts })(App);
